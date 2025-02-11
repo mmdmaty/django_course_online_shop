@@ -1,11 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base/_base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
     <h1>home page</h1>
-</body>
-</html>
+    {% if user.is_authenticated %}
+    <h2>{{user.username}}</h2>
+    
+    <form action="{% url "logout" %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">logout</button>
+    </form>
+    {% else %}
+        <a href="{% url "login" %}" class="btn btn-primary">Login</a>
+    {% endif %}
+    
+
+
+{% endblock content %}

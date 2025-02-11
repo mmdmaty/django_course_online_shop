@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-q@-5vmme2kxc)^du18exw$8bx5^(z9bq_c#47f%9!cns$iprs)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
+
 
 
 # Application definition
@@ -37,9 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #third party
+    'crispy_forms',
+    'crispy_bootstrap5', 
+
     #local
     'user',
     'pages',
+    'auth_1'
 ]
 
 MIDDLEWARE = [
@@ -141,3 +147,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #auth user model config
 AUTH_USER_MODEL = 'user.CustomUserModel'
+
+#crispy forms config
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+#login logout redirect config
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
