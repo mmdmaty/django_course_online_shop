@@ -10,9 +10,11 @@
         <button type="submit" class="btn btn-primary">logout</button>
     </form>
     {% else %}
-        <a href="{% url "login" %}" class="btn btn-primary">Login</a>
+        <div class="container mt-5">
+            <a href="{% url "login" %}" class="btn btn-primary">Login</a> | <a href="{% url "signup" %}" class="btn btn-primary">Signup</a>
+        </div>
     {% endif %}
     
-
+ 
 
 {% endblock content %}
