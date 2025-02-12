@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
 
+env = Env()
+env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +44,8 @@ INSTALLED_APPS = [
     #third party
     'crispy_forms',
     'crispy_bootstrap5', 
+    'allauth',
+    'allauth.account',
 
     #local
     'user',
@@ -56,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -71,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -154,3 +161,26 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 #login logout redirect config
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+
+#email config
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# all auth config
+AUTHENTICATION_BACKENDS = [
+
+    'django.contrib.auth.backends.ModelBackend',
+
+    'allauth.account.auth_backends.AuthenticationBackend',
+    ]
+
+ACCOUNT_AUTHENTICATION_METHOD= 'email'
+ACCOUNT_EMAIL_REQUIRED = True 
+ACCOUNT_UNIQUE_EMAIL = True 
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_MAX_EMAIL_ADDRESSES = 1
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"  # مطمئن شو که ایمیل‌ها باید تایید بشن
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True  # تأیید ایمیل برای تغییر نیاز باشه
+SITE_ID = 1
+ACCOUNT_SIGNUP_REDIRECT_URL = "account_login"  # یا هر صفحه‌ای که می‌خوای
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "home"

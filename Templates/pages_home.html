@@ -5,13 +5,13 @@
     {% if user.is_authenticated %}
     <h2>{{user.username}}</h2>
     
-    <form action="{% url "logout" %}" method="post">
+    <form action="{% url "account_logout" %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">logout</button>
     </form>
     {% else %}
         <div class="container mt-5">
-            <a href="{% url "login" %}" class="btn btn-primary">Login</a> | <a href="{% url "signup" %}" class="btn btn-primary">Signup</a>
+            <a href="{% url "account_login" %}" class="btn btn-primary">Login</a> | <a href="{% url "account_signup" %}" class="btn btn-primary">Signup</a>
         </div>
     {% endif %}
     
